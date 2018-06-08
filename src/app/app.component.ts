@@ -1,10 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { ModalController, Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+import { LoginPage } from '../pages/login/login';
+import { RequestService } from '../services/request.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   templateUrl: 'app.html'
@@ -15,8 +18,14 @@ export class MyApp {
   rootPage: any = HomePage;
 
   pages: Array<{title: string, component: any}>;
-
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  me: any = {};
+  requests: any = [];
+  shouldAdd: boolean;
+  mailsShown: any = [];
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
+              private usersService: UserService,
+              private requestService: RequestService,
+              public modalCtrl: ModalController) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -24,7 +33,37 @@ export class MyApp {
       { title: 'Home', component: HomePage },
       { title: 'List', component: ListPage }
     ];
+    const user = JSON.parse(localStorage.getItem('msn_user'));
+    if(!user) {
+      this.presentModal();
+    }
 
+    this.me = JSON.parse(localStorage.getItem('msn_user'));
+    if (!this.me) {
+      return;
+    }
+    this.usersService.getUser(this.me.details.user.uid).valueChanges().subscribe((result) => {
+      console.log(this.mailsShown);
+      this.me = result;
+      this.requestService.getRequestsForEmail(this.me.email).valueChanges().subscribe( (requests: any) => {
+        this.requests = requests;
+        this.requests = this.requests.filter((r) => {
+          return r.status !== 'accepted' && r.status !== 'rejected';
+        });
+        this.requests.forEach((r) => {
+          if(this.mailsShown.indexOf(r.sender.email) === -1) {
+            this.mailsShown.push(r.sender.email);
+            this.dialogService.addDialog(FriendRequestModalComponent, {scope: this, currentRequest: r});
+          }
+        });
+      });
+    });
+
+  }
+
+  presentModal() {
+    const modal = this.modalCtrl.create(LoginPage);
+    modal.present();
   }
 
   initializeApp() {

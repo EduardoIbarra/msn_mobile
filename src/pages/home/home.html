@@ -4,15 +4,48 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Home</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only color="royal" (click)="sendRequest()">
+        <img src="assets/img/logo_live_add.png" class="icon-in-button">
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+<ion-content padding class="backgroundAmsnImg bluewhitebluebg">
+  <ion-grid id="homeMeContainer">
+    <ion-row>
+      <ion-col col-3>
+        <div class="avatarFrameOnline">
+          <img src="http://via.placeholder.com/75x75" alt="">
+        </div>
+      </ion-col>
+      <ion-col col-9 padding>
+        {{me.nick}}<br />
+        <span (click)="startEditingSubnick()" *ngIf="!editingSubnick && !me.subnick">< Escribe un mensaje Personal ></span>
+        <span (click)="startEditingSubnick()" *ngIf="!editingSubnick && me.subnick">{{me.subnick}}</span>
+        <span *ngIf="editingSubnick" class="marto5">
+          <input id="subnickTxt" type="text" (keyup.enter)="setSubnick()" [(ngModel)]="me.subnick" autofocus>
+        </span>
+        <br />
+        <small>{{me.email}}</small>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+  <div class="searchBoxContainer">
+    <ion-input type="search" id="searchField" placeholder="Busca entre tus Contactos" [(ngModel)]="searchQuery"></ion-input>
+  </div>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  <div *ngIf="me.friends && me.friends.length">
+    <div>
+      <fa name="chevron-down"></fa>
+      <b>Amigos ({{me.friends.length}}/{{me.friends.length}})</b>
+    </div>
+    <div class="contact-list-item" (click)="openChat(u.uid)" *ngFor="let u of me.friends | myfilter: searchQuery | sortBy : 'nick'">
+      <img src="assets/img/logo_live_{{u.status || 'offline'}}.png" class="status">
+      <b>{{u.nick}}</b> <i class="msnicon brb"></i>
+      <small *ngIf="u.subnick">{{u.subnick}}</small>
+    </div>
+  </div>
 </ion-content>

@@ -14,6 +14,11 @@ import { AngularFireModule } from 'angularfire2';
 import { UserService } from '../services/user.service';
 import { ConversationService } from '../services/conversation.service';
 import { RequestService } from '../services/request.service';
+import { LoginPage } from '../pages/login/login';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { ConversationPage } from '../pages/conversation/conversation';
+import { MyFilterPipe, SortPipe } from './app.pipes';
+
 export const firebaseConfig = {
   apiKey: 'AIzaSyB7l5cIu6b7OGahxBtZWhER3vqV6xU6-lA',
   authDomain: 'msnp-fdd0e.firebaseapp.com',
@@ -26,20 +31,27 @@ export const firebaseConfig = {
   declarations: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    LoginPage,
+    ConversationPage,
+    MyFilterPipe,
+    SortPipe
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AngularFontAwesomeModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    LoginPage,
+    ConversationPage
   ],
   providers: [
     StatusBar,
