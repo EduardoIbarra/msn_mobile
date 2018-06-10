@@ -18,6 +18,8 @@ import { LoginPage } from '../pages/login/login';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { ConversationPage } from '../pages/conversation/conversation';
 import { MyFilterPipe, SortPipe } from './app.pipes';
+import { AboutPage } from '../pages/about/about';
+import { PrivacyPage } from '../pages/privacy/privacy';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyB7l5cIu6b7OGahxBtZWhER3vqV6xU6-lA',
@@ -35,7 +37,9 @@ export const firebaseConfig = {
     LoginPage,
     ConversationPage,
     MyFilterPipe,
-    SortPipe
+    SortPipe,
+    AboutPage,
+    PrivacyPage
   ],
   imports: [
     BrowserModule,
@@ -51,7 +55,9 @@ export const firebaseConfig = {
     HomePage,
     ListPage,
     LoginPage,
-    ConversationPage
+    ConversationPage,
+    AboutPage,
+    PrivacyPage
   ],
   providers: [
     StatusBar,

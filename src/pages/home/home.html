@@ -13,7 +13,7 @@
 </ion-header>
 
 <ion-content padding class="backgroundAmsnImg bluewhitebluebg">
-  <ion-grid id="homeMeContainer">
+  <ion-grid *ngIf="me" id="homeMeContainer">
     <ion-row>
       <ion-col col-3>
         <div class="avatarFrameOnline">
@@ -33,11 +33,11 @@
     </ion-row>
   </ion-grid>
 
-  <div class="searchBoxContainer">
+  <div *ngIf="me" class="searchBoxContainer">
     <ion-input type="search" id="searchField" placeholder="Busca entre tus Contactos" [(ngModel)]="searchQuery"></ion-input>
   </div>
 
-  <div *ngIf="me.friends && me.friends.length">
+  <div *ngIf="me && me.friends && me.friends.length">
     <div>
       <fa name="chevron-down"></fa>
       <b>Amigos ({{me.friends.length}}/{{me.friends.length}})</b>

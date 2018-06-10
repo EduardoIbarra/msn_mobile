@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { NavController, NavParams, ViewController, App } from 'ionic-angular';
 import { UserService } from '../../services/user.service';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the LoginPage page.
@@ -18,26 +19,26 @@ export class LoginPage {
     nick: null,
     email: null,
     password: null,
-    password2: null
+    password2: null,
+    login_status: 'online'
   };
   operation = 'login';
   constructor(public navCtrl: NavController, public navParams: NavParams,
+              public appCtrl: App,
               public viewCtrl: ViewController, public usersService: UserService) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }
-
-  dismiss() {
-    this.viewCtrl.dismiss();
-  }
   login() {
     this.usersService.signInWithEmailAndPassword(this.user).then((data: any) => {
       this.usersService.getUser(data.user.uid).valueChanges().subscribe((u: any) => {
         u.details = data;
         localStorage.setItem('msn_user', JSON.stringify(u));
-        this.dismiss();
+        this.usersService.setUserProperty('status', this.user.login_status, data.user.uid).then(() => {
+          window.location.reload();
+        });
       });
     }).catch((e) => {
       console.log(e);
@@ -45,6 +46,10 @@ export class LoginPage {
     });
   }
   register() {
+    if(this.user.password != this.user.password2) {
+      alert('Las contraseñas deben coincidir');
+      return;
+    }
     this.usersService.registerWithEmailAndPassword(this.user).then((data: any) => {
       data.created_at = Date.now();
       const thisUser: any = {uid: data.uid, email: data.email, nick: this.user.nick};

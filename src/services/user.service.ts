@@ -28,4 +28,11 @@ export class UserService {
     this.afDb.object('users/' + uid + '/friends/' + friendId).set(friendId);
     return this.afDb.object('users/' + friendId + '/friends/' + uid).set(uid);
   }
+  logout(){
+    return this.afAuth.auth.signOut();
+  }
+  isLogged() {
+    const me = JSON.parse(localStorage.getItem('msn_user'));
+    return !!me;
+  }
 }
