@@ -3,6 +3,7 @@ import { AlertController, NavController } from 'ionic-angular';
 import { RequestService } from '../../services/request.service';
 import { UserService } from '../../services/user.service';
 import { ConversationPage } from '../conversation/conversation';
+import { AngularFireStorage } from 'angularfire2/storage';
 
 @Component({
   selector: 'page-home',
@@ -17,9 +18,11 @@ export class HomePage {
   closeResult: string;
   requestEmail: string;
   searchQuery = '';
+  picture = '';
   constructor(private usersService: UserService,
               private navContrller: NavController,
               public alertCtrl: AlertController,
+              private fbStorage: AngularFireStorage,
               private requestService: RequestService) {
     this.usersService.getUsers().valueChanges().subscribe((result) => {
       this.users = result;
@@ -36,6 +39,12 @@ export class HomePage {
           this.me.friends[i] = mf;
         });
       });
+      if (this.me.profile_picture){
+        this.picture = this.fbStorage.ref('pictures/'+this.me.profile_picture).getDownloadURL();
+        console.log(this.picture);
+      } else {
+        this.picture = 'http://via.placeholder.com/180x180';
+      }
       console.log(this.me.friends);
     });
     const audio = new Audio('assets/sound/online.m4a');

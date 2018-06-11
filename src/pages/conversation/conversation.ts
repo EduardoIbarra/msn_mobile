@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Content, NavParams } from 'ionic-angular';
 import { UserService } from '../../services/user.service';
 import { ConversationService } from '../../services/conversation.service';
+import { AngularFireStorage } from 'angularfire2/storage';
 
 @Component({
   selector: 'page-conversation',
@@ -17,12 +18,19 @@ export class ConversationPage {
   shake = false;
   @ViewChild(Content) content: Content;
   constructor(private userService: UserService, public navParams: NavParams,
+              private fbStorage: AngularFireStorage,
               private conversationService: ConversationService) {
     this.me = JSON.parse(localStorage.getItem('msn_user'));
     this.friendId = this.navParams.get('uid');
     this.ids = [this.me.details.user.uid, this.friendId].sort();
     this.userService.getUser(this.friendId).valueChanges().subscribe((user) => {
       this.friend = user;
+      if (this.friend.profile_picture){
+        this.picture = this.fbStorage.ref('pictures/'+this.friend.profile_picture).getDownloadURL();
+        console.log(this.picture);
+      } else {
+        this.picture = 'http://via.placeholder.com/75x75';
+      }
       console.log(this.friend);
       this.conversationService.getConversation(this.ids.join('||')).valueChanges()
         .subscribe((result) => {
