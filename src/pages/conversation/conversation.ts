@@ -16,6 +16,7 @@ export class ConversationPage {
   conversation: any = [];
   ids: any = [];
   shake = false;
+  picture: any;
   @ViewChild(Content) content: Content;
   constructor(private userService: UserService, public navParams: NavParams,
               private fbStorage: AngularFireStorage,

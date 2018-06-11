@@ -18,7 +18,7 @@ export class HomePage {
   closeResult: string;
   requestEmail: string;
   searchQuery = '';
-  picture = '';
+  picture: any;
   constructor(private usersService: UserService,
               private navContrller: NavController,
               public alertCtrl: AlertController,

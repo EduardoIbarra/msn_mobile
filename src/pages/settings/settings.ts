@@ -19,7 +19,7 @@ export class SettingsPage {
   currentPictureId: any;
   me: any = {};
   user: any = {};
-  picture = '';
+  picture: any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public camera: Camera, private fbStorage: AngularFireStorage,
               public userService: UserService) {
