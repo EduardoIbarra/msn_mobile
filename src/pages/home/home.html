@@ -34,7 +34,15 @@
     </ion-row>
   </ion-grid>
 
-  <div *ngIf="me" class="searchBoxContainer">
+  <div *ngIf="me && me.friends && me.friends.length <= 0">
+    <ion-card>
+      <ion-card-content>
+        <b>Aun no tienes amigos agregados, ¡Agrega el primero!</b>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div *ngIf="me && me.friends  && me.friends.length" class="searchBoxContainer">
     <ion-input type="search" id="searchField" placeholder="Busca entre tus Contactos" [(ngModel)]="searchQuery"></ion-input>
   </div>
 

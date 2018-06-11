@@ -29,6 +29,7 @@
     "@ngx-translate/core": "^9.1.1",
     "angular-font-awesome": "^3.1.2",
     "angularfire2": "^5.0.0-rc.10",
+    "cordova-android": "7.0.0",
     "cordova-custom-config": "^5.0.2",
     "cordova-ios": "4.5.4",
     "cordova-plugin-camera": "^4.0.3",
@@ -63,7 +64,8 @@
       "cordova-custom-config": {}
     },
     "platforms": [
-      "ios"
+      "ios",
+      "android"
     ]
   }
 }
