@@ -1,0 +1,70 @@
+<!--
+  Generated template for the SettingsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Configuración</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="backgroundAmsnImg">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6 offset-3>
+        <div class="avatarFrameOnline">
+          <img *ngIf="me.profile_picture" [src]="picture | async" class="avatarImage img-fluid">
+          <img *ngIf="!me.profile_picture" [src]="picture" class="avatarImage img-fluid">
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="marto15">
+      <ion-col col-6>
+        <br />
+        <span>Cambiar Foto</span>
+      </ion-col>
+      <ion-col col-6>
+        <a ion-button (click)="takePicture('camera')">
+          <ion-icon name="camera"></ion-icon>
+        </a>
+        <a ion-button (click)="takePicture('album')">
+          <ion-icon name="images"></ion-icon>
+        </a>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-list>
+    <ion-item>
+      <ion-label fixed>Nick</ion-label>
+      <ion-input [(ngModel)]="user.nick" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>Subnick</ion-label>
+      <ion-input [(ngModel)]="user.subnick" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>Email</ion-label>
+      <ion-input disabled [(ngModel)]="user.email" type="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Status</ion-label>
+      <ion-select [(ngModel)]="user.status">
+        <ion-option value="online">Conectado</ion-option>
+        <ion-option value="away">Ausente</ion-option>
+        <ion-option value="busy">Ocupado</ion-option>
+        <ion-option value="appear_offline">Desconectado</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <a ion-button full (click)="saveSettings()">Guardar</a>
+</ion-content>

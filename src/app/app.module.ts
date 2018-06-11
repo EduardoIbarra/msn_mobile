@@ -11,6 +11,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireModule } from 'angularfire2';
+import { AngularFireStorageModule } from 'angularfire2/storage';
 import { UserService } from '../services/user.service';
 import { ConversationService } from '../services/conversation.service';
 import { RequestService } from '../services/request.service';
@@ -20,6 +21,8 @@ import { ConversationPage } from '../pages/conversation/conversation';
 import { MyFilterPipe, SortPipe } from './app.pipes';
 import { AboutPage } from '../pages/about/about';
 import { PrivacyPage } from '../pages/privacy/privacy';
+import { Camera } from '@ionic-native/camera';
+import { SettingsPage } from '../pages/settings/settings';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyB7l5cIu6b7OGahxBtZWhER3vqV6xU6-lA',
@@ -39,7 +42,8 @@ export const firebaseConfig = {
     MyFilterPipe,
     SortPipe,
     AboutPage,
-    PrivacyPage
+    PrivacyPage,
+    SettingsPage
   ],
   imports: [
     BrowserModule,
@@ -47,7 +51,8 @@ export const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    AngularFireStorageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -57,7 +62,8 @@ export const firebaseConfig = {
     LoginPage,
     ConversationPage,
     AboutPage,
-    PrivacyPage
+    PrivacyPage,
+    SettingsPage
   ],
   providers: [
     StatusBar,
@@ -65,7 +71,8 @@ export const firebaseConfig = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UserService,
     ConversationService,
-    RequestService
+    RequestService,
+    Camera
   ]
 })
 export class AppModule {}

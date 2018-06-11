@@ -10,6 +10,7 @@ import { RequestService } from '../services/request.service';
 import { UserService } from '../services/user.service';
 import { AboutPage } from '../pages/about/about';
 import { PrivacyPage } from '../pages/privacy/privacy';
+import { SettingsPage } from '../pages/settings/settings';
 
 @Component({
   templateUrl: 'app.html'
@@ -36,7 +37,8 @@ export class MyApp {
     this.pages = [
       { title: 'Inicio', component: HomePage },
       { title: 'Acerca de', component: AboutPage },
-      { title: 'Privacidad', component: PrivacyPage }
+      { title: 'Privacidad', component: PrivacyPage },
+      { title: 'Configuración', component: SettingsPage }
     ];
     const user = JSON.parse(localStorage.getItem('msn_user'));
     if(!user) {

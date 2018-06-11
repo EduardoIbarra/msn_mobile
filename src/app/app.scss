@@ -187,7 +187,7 @@ img.icon {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4b8ae', endColorstr='#df896d',GradientType=0 ); /* IE6-9 */
 }
 .backgroundAmsnImg {
-  background-image: url(/assets/img/msnbg_tall.jpg);
+  background-image: url(../assets/img/msnbg_tall.jpg);
   background-size: contain;
   background-repeat: no-repeat;
   background-color: white;
@@ -200,7 +200,7 @@ img.icon {
 #friendConversationContainer {
   position: fixed;
   border: 1px solid #9dd8f4;
-  background-image: url(/assets/img/msnbg_tall.jpg);
+  background-image: url(../assets/img/msnbg_tall.jpg);
   background-size: 100%;
   background-repeat: no-repeat;
   background-color: #ffffff8a;
@@ -241,4 +241,13 @@ div#avatarLogin {
 }
 .bposy0 {
   background-position-y: 0px !important;
+}
+.marto15 {
+  margin-top: 15px;
+}
+.marto5 {
+  margin-top: 5px;
+}
+.marto10 {
+  margin-top: 10px;
 }
