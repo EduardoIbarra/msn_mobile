@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { UserService } from '../../services/user.service';
@@ -22,6 +22,7 @@ export class SettingsPage {
   picture: any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public camera: Camera, private fbStorage: AngularFireStorage,
+              public toastCtrl: ToastController,
               public userService: UserService) {
     this.me = JSON.parse(localStorage.getItem('msn_user'));
     this.user = this.me;
@@ -70,7 +71,11 @@ export class SettingsPage {
   saveSettings() {
     this.user.profile_picture = (this.currentPictureId) ? this.currentPictureId+'.jpg' : null;
     this.userService.updateProfilePicture(this.user, this.me.uid).then( () => {
-      alert('Configuración Guardada!');
+      const toast = this.toastCtrl.create({
+        message: 'Configuración Guardada!',
+        duration: 3000
+      });
+      toast.present();
     });
   }
 

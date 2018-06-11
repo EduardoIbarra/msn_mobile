@@ -16,7 +16,7 @@
   <ion-grid *ngIf="me" id="homeMeContainer">
     <ion-row>
       <ion-col col-3>
-        <div class="avatarFrameOnline">
+        <div class="avatarFrame{{me.status}}">
           <img *ngIf="me.profile_picture" [src]="picture | async" class="avatarImage img-fluid">
           <img *ngIf="!me.profile_picture" [src]="picture" class="avatarImage img-fluid">
         </div>

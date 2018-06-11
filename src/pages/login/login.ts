@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController, App } from 'ionic-angular';
+import { NavController, NavParams, ViewController, App, ToastController } from 'ionic-angular';
 import { UserService } from '../../services/user.service';
 
 /**
@@ -23,7 +23,7 @@ export class LoginPage {
   };
   operation = 'login';
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public appCtrl: App,
+              public appCtrl: App, public toastCtrl: ToastController,
               public viewCtrl: ViewController, public usersService: UserService) {
   }
 
@@ -41,12 +41,20 @@ export class LoginPage {
       });
     }).catch((e) => {
       console.log(e);
-      alert('Error: ' + e.message);
+      const toast = this.toastCtrl.create({
+        message: 'Error: ' + e.message,
+        duration: 3000
+      });
+      toast.present();
     });
   }
   register() {
     if(this.user.password != this.user.password2) {
-      alert('Las contraseñas deben coincidir');
+      const toast = this.toastCtrl.create({
+        message: 'Las contraseñas deben coincidir',
+        duration: 3000
+      });
+      toast.present();
       return;
     }
     this.usersService.registerWithEmailAndPassword(this.user).then((data: any) => {
@@ -54,11 +62,21 @@ export class LoginPage {
       const thisUser: any = {uid: data.user.uid, email: data.user.email, nick: this.user.nick};
       this.usersService.createUser(thisUser).then((user) => {
         this.operation = 'login';
-        alert('Registrado con éxito, ya puedes hacer Login.');
+        const toast = this.toastCtrl.create({
+          message: 'Registrado con éxito, ya puedes hacer Login.',
+          duration: 3000
+        });
+        toast.present();
+
       });
     }).catch((e) => {
       console.log(e);
-      alert('Error: ' + e.message);
+      const toast = this.toastCtrl.create({
+        message: 'Error: ' + e.message,
+        duration: 3000
+      });
+      toast.present();
+
     });
   }
 }

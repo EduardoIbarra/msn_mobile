@@ -14,7 +14,7 @@
   <ion-grid id="friendConversationContainer">
     <ion-row>
       <ion-col col-3>
-        <div class="avatarFrameOnline">
+        <div class="avatarFrame{{friend.status}}">
           <img *ngIf="friend.profile_picture" [src]="picture | async" class="avatarImage img-fluid">
           <img *ngIf="!friend.profile_picture" [src]="picture" class="avatarImage img-fluid">
         </div>
@@ -27,16 +27,18 @@
   </ion-grid>
 
   <div class="bgWhite" margin padding>
-    <div class="messageGroup" *ngFor="let m of conversation">
-      <div *ngIf="m.type == 'text'">
-        {{getUserNickById(m.sender)}} dice: <br />
-        <ul>
-          <li>{{m.content}}</li>
-        </ul>
-      </div>
-      <div *ngIf="m.type == 'zumbido'">
-        {{getUserNickById(m.sender)}} envió un zumbido <br />
-      </div>
+    <div class="messageGroup" *ngFor="let m of conversation; let i = index">
+      <ng-container>
+        <div *ngIf="m.type == 'text'">
+          {{getUserNickById(m.sender)}} dice: <br />
+          <ul>
+            <li>{{m.content}}</li>
+          </ul>
+        </div>
+        <div *ngIf="m.type == 'zumbido'">
+          {{getUserNickById(m.sender)}} envió un zumbido <br />
+        </div>
+      </ng-container>
     </div>
   </div>
 

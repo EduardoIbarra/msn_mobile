@@ -12,7 +12,7 @@ export class ConversationService {
     return this.afDb.list('conversations/');
   }
   getConversation(uid) {
-    return this.afDb.object('conversations/' + uid);
+    return this.afDb.list('conversations/' + uid);
   }
   updateMessage(conversation, message) {
     return this.afDb.object('conversations/' + conversation + '/' + message.timestamp).set(message);
