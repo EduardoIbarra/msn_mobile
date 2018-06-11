@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.amsn.app" version="0.0.4" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.amsn.app" version="0.0.5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>MSN Alive</name>
     <description>Un app de mensajería llena de nostalgia.</description>
     <author email="eduardoibarra904@gmail.com" href="http://eduardoibarra.com/">Eduardo Ibarra</author>
@@ -91,5 +91,5 @@
     <allow-navigation href="http://10.0.0.25:8100" />
     <plugin name="cordova-custom-config" spec="^5.0.2" />
     <engine name="ios" spec="4.5.4" />
-    <engine name="android" spec="~7.0.0" />
+    <engine name="android" spec="7.0.0" />
 </widget>

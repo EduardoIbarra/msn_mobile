@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, App } from 'ionic-angular';
 import { UserService } from '../../services/user.service';
-import { HomePage } from '../home/home';
 
 /**
  * Generated class for the LoginPage page.
