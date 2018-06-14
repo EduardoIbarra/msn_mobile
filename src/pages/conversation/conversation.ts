@@ -65,7 +65,7 @@ export class ConversationPage {
         return;
       }
       this.content.scrollToBottom();
-    });
+    }, 500);
   }
   getUserNickById(id) {
     if (id === this.friendId) {

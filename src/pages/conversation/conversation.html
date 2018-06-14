@@ -34,7 +34,7 @@
             <li>{{m.content}}</li>
           </ul>
         </div>
-        <div *ngIf="m.type == 'zumbido'">
+        <div *ngIf="m.type == 'zumbido'" class="martobo10">
           {{getUserNickById(m.sender)}} envió un zumbido <br />
         </div>
         <div *ngIf="m.type == 'picture'">
@@ -45,13 +45,16 @@
     </div>
   </div>
 
-  <ion-fab right bottom>
-    <button ion-fab><ion-icon name="arrow-dropup"></ion-icon></button>
+  <ion-fab right middle>
+    <button ion-fab><ion-icon name="send"></ion-icon></button>
     <ion-fab-list side="top">
-      <button color="danger" (click)="sendZumbido()" ion-fab><ion-icon name="alarm"></ion-icon></button>
+      <button outline (click)="sendZumbido()" ion-fab>
+        <img src="assets/img/zumbido.png" alt="">
+      </button>
     </ion-fab-list>
-    <ion-fab-list side="left">
+    <ion-fab-list side="bottom">
       <button color="dark" (click)="takePicture('camera')" ion-fab><ion-icon name="camera"></ion-icon></button>
+      <button color="dark" (click)="takePicture('album')" ion-fab><ion-icon name="images"></ion-icon></button>
     </ion-fab-list>
   </ion-fab>
 </ion-content>
