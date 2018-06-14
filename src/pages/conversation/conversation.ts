@@ -5,6 +5,7 @@ import { ConversationService } from '../../services/conversation.service';
 import { FcmProvider } from '../../providers/fcm/fcm';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { AngularFireStorage } from 'angularfire2/storage';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @Component({
   selector: 'page-conversation',
@@ -26,6 +27,7 @@ export class ConversationPage {
   constructor(private userService: UserService, public navParams: NavParams,
               private fcm: FcmProvider,
               public camera: Camera, private fbStorage: AngularFireStorage,
+              private iab: InAppBrowser,
               private conversationService: ConversationService) {
     this.me = JSON.parse(localStorage.getItem('msn_user'));
     this.my_picture = (this.me.downloaded_picture) ? this.me.profile_picture
@@ -165,5 +167,8 @@ export class ConversationPage {
     } catch (e) {
       console.error(e);
     }
+  }
+  openURL(url) {
+    this.iab.create(url);
   }
 }

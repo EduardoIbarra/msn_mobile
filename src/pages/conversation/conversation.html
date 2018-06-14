@@ -49,12 +49,17 @@
     <button ion-fab><ion-icon name="send"></ion-icon></button>
     <ion-fab-list side="top">
       <button outline (click)="sendZumbido()" ion-fab>
+        <ion-label>Enviar Zumbido</ion-label>
         <img src="assets/img/zumbido.png" alt="">
       </button>
     </ion-fab-list>
     <ion-fab-list side="bottom">
-      <button color="dark" (click)="takePicture('camera')" ion-fab><ion-icon name="camera"></ion-icon></button>
-      <button color="dark" (click)="takePicture('album')" ion-fab><ion-icon name="images"></ion-icon></button>
+      <button color="dark" (click)="takePicture('camera')" ion-fab>
+        <ion-label>Enviar Foto</ion-label>
+        <ion-icon name="camera"></ion-icon></button>
+      <button color="dark" (click)="takePicture('album')" ion-fab>
+        <ion-label>Enviar desde Album</ion-label>
+        <ion-icon name="images"></ion-icon></button>
     </ion-fab-list>
   </ion-fab>
 </ion-content>

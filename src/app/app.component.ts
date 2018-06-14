@@ -40,8 +40,8 @@ export class MyApp {
     this.pages = [
       { title: 'Inicio', component: HomePage },
       { title: 'Acerca de', component: AboutPage },
-      { title: 'Privacidad', component: PrivacyPage },
-      { title: 'Configuración', component: SettingsPage }
+      { title: 'Configuración', component: SettingsPage },
+      { title: 'Privacidad', component: PrivacyPage }
     ];
     const user = JSON.parse(localStorage.getItem('msn_user'));
     if(!user) {

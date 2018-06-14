@@ -26,6 +26,7 @@ import { SettingsPage } from '../pages/settings/settings';
 import { FcmProvider } from '../providers/fcm/fcm';
 import { Firebase } from '@ionic-native/firebase';
 import { HttpClientModule } from '@angular/common/http';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyB7l5cIu6b7OGahxBtZWhER3vqV6xU6-lA',
@@ -56,7 +57,7 @@ export const firebaseConfig = {
     AngularFireAuthModule,
     AngularFontAwesomeModule,
     AngularFireStorageModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -78,7 +79,8 @@ export const firebaseConfig = {
     RequestService,
     Camera,
     FcmProvider,
-    Firebase
+    Firebase,
+    InAppBrowser
   ]
 })
 export class AppModule {}

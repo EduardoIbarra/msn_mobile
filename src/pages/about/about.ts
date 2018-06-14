@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 /**
  * Generated class for the AboutPage page.
@@ -14,11 +15,16 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class AboutPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              private iab: InAppBrowser) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AboutPage');
+  }
+
+  openURL(url) {
+    this.iab.create(url);
   }
 
 }
