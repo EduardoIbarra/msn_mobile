@@ -15,8 +15,7 @@
     <ion-row>
       <ion-col col-3>
         <div class="avatarFrame{{friend.status}}">
-          <img *ngIf="friend.profile_picture" [src]="picture | async" class="avatarImage img-fluid">
-          <img *ngIf="!friend.profile_picture" [src]="picture" class="avatarImage img-fluid">
+          <img [src]="picture" class="avatarImage img-fluid">
         </div>
       </ion-col>
       <ion-col col-9 padding>

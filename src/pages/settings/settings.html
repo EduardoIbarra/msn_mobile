@@ -20,9 +20,8 @@
   <ion-grid>
     <ion-row>
       <ion-col col-6 offset-3>
-        <div class="avatarFrame{{me.status}}">
-          <img *ngIf="me.profile_picture" [src]="picture | async" class="avatarImage img-fluid">
-          <img *ngIf="!me.profile_picture" [src]="picture" class="avatarImage img-fluid">
+        <div class="avatarFrame{{me.status}}" *ngIf="picture">
+          <img [src]="picture" class="avatarImage img-fluid">
         </div>
       </ion-col>
     </ion-row>

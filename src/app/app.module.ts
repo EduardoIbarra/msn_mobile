@@ -23,6 +23,9 @@ import { AboutPage } from '../pages/about/about';
 import { PrivacyPage } from '../pages/privacy/privacy';
 import { Camera } from '@ionic-native/camera';
 import { SettingsPage } from '../pages/settings/settings';
+import { FcmProvider } from '../providers/fcm/fcm';
+import { Firebase } from '@ionic-native/firebase';
+import { HttpClientModule } from '@angular/common/http';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyB7l5cIu6b7OGahxBtZWhER3vqV6xU6-lA',
@@ -52,7 +55,8 @@ export const firebaseConfig = {
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFontAwesomeModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -72,7 +76,9 @@ export const firebaseConfig = {
     UserService,
     ConversationService,
     RequestService,
-    Camera
+    Camera,
+    FcmProvider,
+    Firebase
   ]
 })
 export class AppModule {}

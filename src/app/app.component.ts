@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { AlertController, ModalController, Nav, Platform } from 'ionic-angular';
+import { AlertController, ModalController, Nav, Platform, ToastController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -10,6 +10,8 @@ import { UserService } from '../services/user.service';
 import { AboutPage } from '../pages/about/about';
 import { PrivacyPage } from '../pages/privacy/privacy';
 import { SettingsPage } from '../pages/settings/settings';
+import { FcmProvider } from '../providers/fcm/fcm';
+import { tap } from 'rxjs/internal/operators';
 
 @Component({
   templateUrl: 'app.html'
@@ -29,6 +31,8 @@ export class MyApp {
               private requestService: RequestService,
               private userService: UserService,
               private modalCtrl: ModalController,
+              private fcm: FcmProvider,
+              private toastCtrl: ToastController,
               public alertCtrl: AlertController) {
     this.initializeApp();
 
@@ -65,6 +69,19 @@ export class MyApp {
       });
     });
 
+  }
+
+  ionViewDidLoad() {
+    this.fcm.getToken();
+    this.fcm.listenToNotification().pipe(
+      tap(msg => {
+        const toast = this.toastCtrl.create({
+          message: msg.body,
+          duration: 3000
+        });
+        toast.present();
+      })
+    );
   }
 
   presentModal() {

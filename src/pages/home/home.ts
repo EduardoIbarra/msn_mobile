@@ -3,7 +3,6 @@ import { AlertController, NavController } from 'ionic-angular';
 import { RequestService } from '../../services/request.service';
 import { UserService } from '../../services/user.service';
 import { ConversationPage } from '../conversation/conversation';
-import { AngularFireStorage } from 'angularfire2/storage';
 
 @Component({
   selector: 'page-home',
@@ -22,7 +21,6 @@ export class HomePage {
   constructor(private usersService: UserService,
               private navContrller: NavController,
               public alertCtrl: AlertController,
-              private fbStorage: AngularFireStorage,
               private requestService: RequestService) {
     this.usersService.getUsers().valueChanges().subscribe((result) => {
       this.users = result;
@@ -33,6 +31,7 @@ export class HomePage {
     }
     this.usersService.getUser(this.me.details.user.uid).valueChanges().subscribe((result: any) => {
       this.me = result;
+      this.picture = (this.me.downloaded_picture) ? this.me.profile_picture : 'https://wir.skyrock.net/wir/v1/profilcrop/?c=mog&w=301&h=301&im=%2Fart%2FPRIP.85914100.3.0.png';
       if(this.me.friends) {
         this.me.friends = Object.keys(this.me.friends).map(function (key) { return result.friends[key]; });
         this.me.friends.forEach((f, i) => {
@@ -42,12 +41,6 @@ export class HomePage {
         });
       }else {
         this.me.friends = [];
-      }
-      if (this.me.profile_picture){
-        this.picture = this.fbStorage.ref('pictures/'+this.me.profile_picture).getDownloadURL();
-        console.log(this.picture);
-      } else {
-        this.picture = 'http://via.placeholder.com/180x180';
       }
       console.log(this.me.friends);
     });

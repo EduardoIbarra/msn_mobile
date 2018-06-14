@@ -27,10 +27,11 @@ export class UserService {
   updateProfilePicture(user, uid) {
     this.afDb.object('users/' + uid + '/nick').set(user.nick);
     this.afDb.object('users/' + uid + '/status').set(user.status);
-    if(user.profile_picture){
-      this.afDb.object('users/' + uid + '/profile_picture').set(user.profile_picture);
-    }
     return this.afDb.object('users/' + uid + '/subnick').set(user.subnick);
+  }
+  setProfilePicture(picture_url, uid) {
+    this.afDb.object('users/' + uid + '/downloaded_picture').set(true);
+    return this.afDb.object('users/' + uid + '/profile_picture').set(picture_url);
   }
   addFriend(uid, friendId) {
     this.afDb.object('users/' + uid + '/friends/' + friendId).set(friendId);
