@@ -37,6 +37,10 @@
         <div *ngIf="m.type == 'zumbido'">
           {{getUserNickById(m.sender)}} envió un zumbido <br />
         </div>
+        <div *ngIf="m.type == 'picture'">
+          {{getUserNickById(m.sender)}} envió: <br />
+          <img src="{{m.content}}" class="pictureMessage" alt="Imagen enviada">
+        </div>
       </ng-container>
     </div>
   </div>
@@ -45,6 +49,9 @@
     <button ion-fab><ion-icon name="arrow-dropup"></ion-icon></button>
     <ion-fab-list side="top">
       <button color="danger" (click)="sendZumbido()" ion-fab><ion-icon name="alarm"></ion-icon></button>
+    </ion-fab-list>
+    <ion-fab-list side="left">
+      <button color="dark" (click)="takePicture('camera')" ion-fab><ion-icon name="camera"></ion-icon></button>
     </ion-fab-list>
   </ion-fab>
 </ion-content>

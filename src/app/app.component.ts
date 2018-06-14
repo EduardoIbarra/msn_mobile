@@ -69,12 +69,10 @@ export class MyApp {
       });
     });
 
-  }
-
-  ionViewDidLoad() {
     this.fcm.getToken();
-    this.fcm.listenToNotification().pipe(
-      tap(msg => {
+    this.fcm.listenToNotification().subscribe(
+      tap((msg: any) => {
+        console.log(msg);
         const toast = this.toastCtrl.create({
           message: msg.body,
           duration: 3000

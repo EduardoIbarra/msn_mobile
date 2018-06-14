@@ -25,8 +25,8 @@ export class FcmProvider {
       token = await this.firebaseNative.getToken();
     }
     if(this.platform.is('ios')) {
-      token = await this.firebaseNative.getToken();
       await this.firebaseNative.grantPermission();
+      token = await this.firebaseNative.getToken();
     }
     return this.saveTokenToFirebase(token);
   }
@@ -42,5 +42,8 @@ export class FcmProvider {
   }
   public listenToNotification() {
     return this.firebaseNative.onNotificationOpen();
+  }
+  sendMessage(uid, message) {
+    return this.afdb.object('messages/' + uid + '/' + message.timestamp).set(message);
   }
 }
