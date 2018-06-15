@@ -24,7 +24,6 @@ import { PrivacyPage } from '../pages/privacy/privacy';
 import { Camera } from '@ionic-native/camera';
 import { SettingsPage } from '../pages/settings/settings';
 import { FcmProvider } from '../providers/fcm/fcm';
-import { Firebase } from '@ionic-native/firebase';
 import { HttpClientModule } from '@angular/common/http';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
@@ -79,7 +78,6 @@ export const firebaseConfig = {
     RequestService,
     Camera,
     FcmProvider,
-    Firebase,
     InAppBrowser
   ]
 })
