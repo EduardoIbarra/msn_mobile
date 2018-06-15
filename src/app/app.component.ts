@@ -33,6 +33,7 @@ export class MyApp {
               private modalCtrl: ModalController,
               private fcm: FcmProvider,
               private toastCtrl: ToastController,
+              public plt: Platform,
               public alertCtrl: AlertController) {
     this.initializeApp();
 
@@ -69,17 +70,21 @@ export class MyApp {
       });
     });
 
-    this.fcm.getToken();
-    this.fcm.listenToNotification().subscribe(
-      tap((msg: any) => {
-        console.log(msg);
-        const toast = this.toastCtrl.create({
-          message: msg.body,
-          duration: 3000
-        });
-        toast.present();
-      })
-    );
+    this.plt.ready().then((readySource) => {
+      this.fcm.getToken();
+      console.log('////////////////');
+      console.log(this.fcm);
+      this.fcm.listenToNotification().pipe(
+          tap((msg:any) => {
+            // show a toast
+            const toast = toastCtrl.create({
+              message: msg.body,
+              duration: 3000
+            });
+            toast.present();
+          })
+        ).subscribe();
+    });
   }
 
   presentModal() {

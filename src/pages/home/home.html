@@ -34,7 +34,7 @@
   </ion-grid>
 
   <div *ngIf="me && me.friends && me.friends.length <= 0">
-    <ion-card>
+    <ion-card (click)="sendRequest()">
       <ion-card-content>
         <b>Aun no tienes amigos agregados, ¡Agrega el primero!</b>
       </ion-card-content>
